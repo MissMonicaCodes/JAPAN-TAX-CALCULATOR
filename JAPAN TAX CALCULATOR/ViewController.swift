@@ -19,7 +19,15 @@ class ViewController: UIViewController {
     @IBOutlet weak var yenCalResult: UILabel!
     
     
+    @IBOutlet weak var nt: UILabel!
     @IBOutlet weak var yen: UILabel!
+    @IBOutlet weak var rateTextField: UITextField!
+    
+    
+    
+    
+    
+    
     
     
     //calculate yen
@@ -28,17 +36,17 @@ class ViewController: UIViewController {
         {
             yenCalResult.isHidden=false
             yenCalResult.text="No price"
-            //yen.isHidden=false
+            yen.isHidden=true
         
         }
         else{
             yenCalResult.isHidden=false
-            let tip=round(Double(priceTextField.text!)!*Double(taxTextField.text!)!/100)
-            yenCalResult.text=String(tip)
-        
-        
-        
-        
+            let tax=Double(priceTextField.text!)!*(1+Double(taxTextField.text!)!/100)
+            let taxResult=Double(tax)/Double(numberTextFIELD.text!)!
+            //let answer=Double(taxResult)*Double(rateTextField.text!)!
+            yenCalResult.text=String(taxResult)
+            yen.isHidden=false
+
         }
       
             
@@ -46,11 +54,31 @@ class ViewController: UIViewController {
     }
     //calculate NT
     @IBAction func ntButtonPress(_ sender: Any) {
+        nt.isHidden=false
+        yen.isHidden=true
+        let tax=Double(priceTextField.text!)!*(1+Double(taxTextField.text!)!/100)
+        let taxResult=Double(tax)/Double(numberTextFIELD.text!)!
+        let answer=Double(taxResult)*Double(rateTextField.text!)!
+        yenCalResult.text=String(answer)
+        
+        
     }
+    
+    
+    //點一下把鍵盤收起來
+    func hideKeyboardWhenTappedAround() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ViewController.dismissKeyboard))
+        view.addGestureRecognizer(tap)
+    }
+    func dismissKeyboard() {
+        view.endEditing(true)
+    }
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        self.hideKeyboardWhenTappedAround()
     }
 
     override func didReceiveMemoryWarning() {
