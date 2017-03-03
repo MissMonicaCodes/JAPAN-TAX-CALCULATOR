@@ -32,11 +32,12 @@ class ViewController: UIViewController {
     
     //calculate yen
     @IBAction func yenButtonPress(_ sender: Any) {
-        if (priceTextField.text == ""||taxTextField.text == "")
+        if (priceTextField.text == ""||taxTextField.text == ""||numberTextFIELD.text == "")
         {
             yenCalResult.isHidden=false
-            yenCalResult.text="No price"
+            yenCalResult.text="輸入有問題喔"
             yen.isHidden=true
+            nt.isHidden=true
         
         }
         else{
