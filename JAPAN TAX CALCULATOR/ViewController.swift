@@ -47,6 +47,7 @@ class ViewController: UIViewController {
             //let answer=Double(taxResult)*Double(rateTextField.text!)!
             yenCalResult.text=String(taxResult)
             yen.isHidden=false
+            nt.isHidden=true
 
         }
       
