@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  JAPAN TAX CALCULATOR
 //
-//  Created by 林淑微 on 2017/3/3.
+//  Created by Monica Lin on 2017/3/3.
 //  Copyright © 2017年 Monicalin. All rights reserved.
 //
 
