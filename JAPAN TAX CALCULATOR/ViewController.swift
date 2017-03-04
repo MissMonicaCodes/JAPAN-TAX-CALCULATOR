@@ -32,19 +32,27 @@ class ViewController: UIViewController {
     
     //calculate yen
     @IBAction func yenButtonPress(_ sender: Any) {
+        
+        
+        priceTextField.resignFirstResponder()
+        taxTextField.resignFirstResponder()
+        numberTextFIELD.resignFirstResponder()
+        rateTextField.resignFirstResponder()
+        
+        //Fool Proof
         if (priceTextField.text == ""||taxTextField.text == ""||numberTextFIELD.text == "")
         {
             yenCalResult.isHidden=false
-            yenCalResult.text="輸入有問題喔"
+            yenCalResult.text="有資料未填"
             yen.isHidden=true
             nt.isHidden=true
         
         }
-        else{
+        else
+        {
             yenCalResult.isHidden=false
             let tax=Double(priceTextField.text!)!*(1+Double(taxTextField.text!)!/100)
             let taxResult=Double(tax)/Double(numberTextFIELD.text!)!
-            //let answer=Double(taxResult)*Double(rateTextField.text!)!
             yenCalResult.text=String(taxResult)
             yen.isHidden=false
             nt.isHidden=true
@@ -54,16 +62,42 @@ class ViewController: UIViewController {
             
         
     }
-    //calculate NT
+    
+    //calculate NTD
     @IBAction func ntButtonPress(_ sender: Any) {
-        nt.isHidden=false
+        priceTextField.resignFirstResponder()
+        taxTextField.resignFirstResponder()
+        numberTextFIELD.resignFirstResponder()
+        rateTextField.resignFirstResponder()
+        
+        
+        yenCalResult.isHidden=false
+        nt.isHidden=true
         yen.isHidden=true
-        let tax=Double(priceTextField.text!)!*(1+Double(taxTextField.text!)!/100)
-        let taxResult=Double(tax)/Double(numberTextFIELD.text!)!
-        let answer=Double(taxResult)*Double(rateTextField.text!)!
-        yenCalResult.text=String(answer)
+       
+        if Double(yenCalResult.text!)!>=0.0
+        {
+            nt.isHidden=false
+            yen.isHidden=true
+            let tax=Double(priceTextField.text!)!*(1+Double(taxTextField.text!)!/100)
+            let taxResult=Double(tax)/Double(numberTextFIELD.text!)!
+            let answer=Double(taxResult)*Double(rateTextField.text!)!
+            yenCalResult.text=String(answer)
+        }
+     
+        
+  
         
         
+    }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool
+    {
+        priceTextField.resignFirstResponder()
+        taxTextField.resignFirstResponder()
+        numberTextFIELD.resignFirstResponder()
+        rateTextField.resignFirstResponder()
+        
+        return true
     }
     
     
